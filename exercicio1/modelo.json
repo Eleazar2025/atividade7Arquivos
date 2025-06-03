@@ -1,0 +1,67 @@
+{
+    "experiment_id": "exp_20250604_001",
+    "model_name": "random_forest_classifier",
+    "dataset": {
+      "name": "nyc_taxi_data",
+      "size": 50000,
+      "features": 15,
+      "train_test_split": 0.8
+    },
+    "training_parameters": {
+      "algorithm": "RandomForest",
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 10,
+        "random_state": 42
+      },
+      "normalization_method": "z-score"
+    },
+    "execution_metrics": {
+      "time_stats": {
+        "mean_execution_time_seconds": 120.5,
+        "std_dev_execution_time_seconds": 5.2,
+        "min_time": 115.3,
+        "max_time": 130.1,
+        "total_training_time": 3615.0
+      },
+      "resource_usage": {
+        "mean_cpu_usage": 78.2,
+        "std_dev_cpu_usage": 3.1,
+        "mean_memory_usage_mb": 2048,
+        "std_dev_memory_usage_mb": 128
+      }
+    },
+    "performance_metrics": {
+      "accuracy": 0.892,
+      "precision": 0.876,
+      "recall": 0.901,
+      "f1_score": 0.888,
+      "auc_roc": 0.932,
+      "confusion_matrix": {
+        "true_positive": 1250,
+        "false_positive": 98,
+        "true_negative": 1350,
+        "false_negative": 75
+      }
+    },
+    "environment": {
+      "platform": "AWS SageMaker",
+      "instance_type": "ml.m5.xlarge",
+      "python_version": "3.8.12",
+      "library_versions": {
+        "scikit-learn": "1.0.2",
+        "pandas": "1.3.5",
+        "numpy": "1.21.6"
+      }
+    },
+    "timestamps": {
+      "start_time": "2025-06-04T09:15:00Z",
+      "end_time": "2025-06-04T10:15:00Z",
+      "last_updated": "2025-06-04T10:16:30Z"
+    },
+    "metadata": {
+      "description": "Modelo para previsão de tarifas de táxi em NYC",
+      "author": "equipe_ml@empresa.com",
+      "version": "1.0.1"
+    }
+  }
