@@ -1,41 +1,16 @@
-import json
-import time
-import numpy as np
-from datetime import datetime
+import pandas as pd
 
-def log_training_metrics(model, X_test, y_test, execution_times, resource_usage):
-    """Função para gerar logs no formato padrão"""
+def processar_logs_treinamentos(nome_arquivo='logs_treinamento.csv'):
+    try:
+        df = pd.read_csv(nome_arquivo)
+        media_tempo = df['tempo_execucao'].mean()
+        desvio_padrao = df['tempo_execucao'].std()
 
-    # Calcula métricas de tempo
-    time_stats = {
-        "mean_execution_time_seconds": np.mean(execution_times),
-        "std_dev_execution_time_seconds": np.std(execution_times),
-        "min_time": min(execution_times),
-        "max_time": max(execution_times),
-        "total_training_time": sum(execution_times)
-    }
+        print(f'Média do tempo de execução: {media_tempo:.2f}')
+        print(f'Desvio padrão do tempo de execução: {desvio_padrao:.2f}')
+    except FileNotFoundError:
+        print("Arquivo não encontrado")
+    except Exception as e:
+        print(f"Erro ao processar o arquivo: {e}")
 
-    # Calcula métricas de desempenho
-    y_pred = model.predict(X_test)
-    performance_metrics = {
-        "accuracy": model.score(X_test, y_test),
-        # Adicionar outras métricas conforme necessário
-    }
-
-    # Cria estrutura completa do log
-    training_log = {
-        "timestamps": {
-            "start_time": datetime.utcnow().isoformat() + "Z",
-            # Outros timestamps
-        },
-        "execution_metrics": {
-            "time_stats": time_stats,
-            "resource_usage": resource_usage
-        },
-        "performance_metrics": performance_metrics,
-        # Outras seções
-    }
-
-    # Salva em arquivo JSON
-    with open(f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json", "w") as f:
-        json.dump(training_log, f, indent=4)
+processar_logs_treinamentos()
